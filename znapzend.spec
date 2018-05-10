@@ -25,12 +25,26 @@ mkdir -p $RPM_BUILD_ROOT/%{_bindir}
 for prog in $(ls $RPM_BUILD_ROOT/opt/znapzend/bin); do
     ln -s /opt/znapzend/bin/$prog $RPM_BUILD_ROOT/%{_bindir}/$prog
 done
+
+# Init script.
+%if 0%{?rhel} <= 6
+# Still on SysV
+mkdir -p $RPM_BUILD_ROOT/%{_initddir}
+<init/znapzend.sysv perl -pe 's{NONE/bin}{%{_bindir}}' >$RPM_BUILD_ROOT/%{_initddir}/znapzend
+chmod +x $RPM_BUILD_ROOT/%{_initddir}/znapzend
+%else
+# Now with SystemD
 mkdir -p $RPM_BUILD_ROOT/%{_unitdir}
 <init/znapzend.service perl -pe 's{NONE/bin}{%{_bindir}}' >$RPM_BUILD_ROOT/%{_unitdir}/znapzend.service
+%endif
 
 %files
 /opt/znapzend
 %doc README.md LICENSE COPYRIGHT CHANGES
 %{_bindir}/*
-%{_unitdir}/*
 %{_mandir}/*/*
+%if 0%{?rhel} <= 6
+%{_initddir}/*
+%else
+%{_unitdir}/*
+%endif
