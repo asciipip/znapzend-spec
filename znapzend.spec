@@ -1,6 +1,6 @@
 Name: znapzend
 Version: 0.20.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: zfs backup with remote capabilities and mbuffer integration
 License: GPLv3+
 URL: http://www.znapzend.org
@@ -19,6 +19,8 @@ Source: https://github.com/oetiker/%{name}/releases/download/v%{version}/%{name}
 %global ownmods %{ownmods}|perl\\(TAP::Harness::Env\\)
 %global ownmods %{ownmods}|perl\\(ZnapZend.*\\)
 %global __requires_exclude ^(%{ownmods})
+
+%global debug_package %{nil}
 
 %description
 ZnapZend is a ZFS centric backup tool. It relies on snapshot, send and
