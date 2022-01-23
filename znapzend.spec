@@ -1,24 +1,10 @@
 Name: znapzend
-Version: 0.20.0
-Release: 2%{?dist}
+Version: 0.21.1
+Release: 1%{?dist}
 Summary: zfs backup with remote capabilities and mbuffer integration
 License: GPLv3+
 URL: http://www.znapzend.org
 Source: https://github.com/oetiker/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.gz
-
-%global __provides_exclude_from ^/opt/znapzend/lib/.*$
-%global ownmods perl\\(CPAN::Meta::Converter\\)
-%global ownmods %{ownmods}|perl\\(EV\\)
-%global ownmods %{ownmods}|perl\\(ExtUtils::.*\\)
-%global ownmods %{ownmods}|perl\\(IO::Pipely\\)
-%global ownmods %{ownmods}|perl\\(IO::Socket::IP\\)
-%global ownmods %{ownmods}|perl\\(Mojo.*\\)
-%global ownmods %{ownmods}|perl\\(Parse::CPAN::Meta\\)
-%global ownmods %{ownmods}|perl\\(Sub::Uplevel\\)
-%global ownmods %{ownmods}|perl\\(Sub::Util\\)
-%global ownmods %{ownmods}|perl\\(TAP::Harness::Env\\)
-%global ownmods %{ownmods}|perl\\(ZnapZend.*\\)
-%global __requires_exclude ^(%{ownmods})
 
 %global debug_package %{nil}
 
