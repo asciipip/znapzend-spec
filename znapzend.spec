@@ -1,6 +1,6 @@
 Name: znapzend
 Version: 0.21.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: zfs backup with remote capabilities and mbuffer integration
 License: GPLv3+
 URL: http://www.znapzend.org
@@ -29,7 +29,7 @@ for prog in $(ls $RPM_BUILD_ROOT/opt/znapzend/bin); do
 done
 
 # Init script.
-%if 0%{?rhel} <= 6
+%if 0%{?fedora} <= 14 && 0%{?rhel} <= 6
 # Still on SysV
 mkdir -p $RPM_BUILD_ROOT/%{_initddir}
 <init/znapzend.sysv perl -pe 's{NONE/bin}{%{_bindir}}' >$RPM_BUILD_ROOT/%{_initddir}/znapzend
@@ -45,7 +45,7 @@ mkdir -p $RPM_BUILD_ROOT/%{_unitdir}
 %doc README.md LICENSE COPYRIGHT CHANGES
 %{_bindir}/*
 %{_mandir}/*/*
-%if 0%{?rhel} <= 6
+%if 0%{?fedora} <= 14 && 0%{?rhel} <= 6
 %{_initddir}/*
 %else
 %{_unitdir}/*
