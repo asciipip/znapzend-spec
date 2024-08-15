@@ -6,6 +6,8 @@ License: GPLv3+
 URL: http://www.znapzend.org
 Source: https://github.com/oetiker/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.gz
 
+%global debug_package %{nil}
+
 %description
 ZnapZend is a ZFS centric backup tool. It relies on snapshot, send and
 receive to do its work. It has the built-in ability to manage both local
@@ -27,7 +29,7 @@ for prog in $(ls $RPM_BUILD_ROOT/opt/znapzend/bin); do
 done
 
 # Init script.
-%if 0%{?rhel} <= 6
+%if 0%{?fedora} <= 14 && 0%{?rhel} <= 6
 # Still on SysV
 mkdir -p $RPM_BUILD_ROOT/%{_initddir}
 <init/znapzend.sysv perl -pe 's{NONE/bin}{%{_bindir}}' >$RPM_BUILD_ROOT/%{_initddir}/znapzend
@@ -43,7 +45,7 @@ mkdir -p $RPM_BUILD_ROOT/%{_unitdir}
 %doc README.md LICENSE COPYRIGHT CHANGES
 %{_bindir}/*
 %{_mandir}/*/*
-%if 0%{?rhel} <= 6
+%if 0%{?fedora} <= 14 && 0%{?rhel} <= 6
 %{_initddir}/*
 %else
 %{_unitdir}/*
